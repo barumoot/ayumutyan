@@ -20,7 +20,7 @@
 
         .container {
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 20px auto;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-radius: 20px;
@@ -112,7 +112,8 @@
             cursor: pointer;
             transition: all 0.3s ease;
             text-align: center;
-            min-width: 150px;
+            min-width: 120px;
+            flex: 1;
         }
 
         .plan-tab.active {
@@ -399,13 +400,22 @@
             }
 
             .plan-tabs {
-                flex-direction: column;
-                align-items: center;
+                gap: 8px;
             }
 
             .plan-tab {
-                width: 100%;
-                max-width: 300px;
+                min-width: 100px;
+                padding: 12px 8px;
+                font-size: 0.9rem;
+            }
+
+            .plan-tab .plan-name {
+                font-size: 0.95rem;
+                margin-bottom: 3px;
+            }
+
+            .plan-tab .plan-distance {
+                font-size: 0.8rem;
             }
 
             .schedule-wrapper {
@@ -426,6 +436,45 @@
 
             .activity-details {
                 grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .container {
+                margin: 5px;
+                border-radius: 10px;
+            }
+
+            .controls-section {
+                padding: 15px;
+            }
+
+            .plan-tabs {
+                gap: 5px;
+            }
+
+            .plan-tab {
+                min-width: 90px;
+                padding: 10px 5px;
+                font-size: 0.85rem;
+            }
+
+            .plan-tab .plan-name {
+                font-size: 0.9rem;
+                margin-bottom: 2px;
+            }
+
+            .plan-tab .plan-distance {
+                font-size: 0.75rem;
+            }
+
+            .duration-toggle {
+                gap: 8px;
+            }
+
+            .toggle-btn {
+                padding: 8px 15px;
+                font-size: 0.9rem;
             }
         }
     </style>

@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏝️ 島合宿スケジュール</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" fill="%23ffffff" fill-opacity="0.05"/></svg>') bottom center/cover no-repeat;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .header .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            z-index: 2;
+            position: relative;
+        }
+
+        .duration-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 30px 0;
+            z-index: 2;
+            position: relative;
+        }
+
+        .toggle-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .toggle-btn.active {
+            background: rgba(255, 255, 255, 0.9);
+            color: #2c3e50;
+        }
+
+        .schedule-wrapper {
+            padding: 40px;
+        }
+
+        .day-section {
+            margin-bottom: 40px;
+        }
+
+        .day-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .day-number {
+            font-size: 2rem;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .day-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .schedule-grid {
+            display: grid;
+            gap: 15px;
+        }
+
+        .schedule-item {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-left: 5px solid #667eea;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .schedule-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+        }
+
+        .schedule-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(102, 126, 234, 0.02) 100%);
+            pointer-events: none;
+        }
+
+        .item-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .time-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .activity-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+            flex: 1;
+        }
+
+        .activity-icon {
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 100%);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .activity-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .detail-item {
+            background: rgba(102, 126, 234, 0.05);
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            color: #555;
+            line-height: 1.4;
+        }
+
+        .summary-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 30px;
+            margin-top: 30px;
+            border-radius: 15px;
+        }
+
+        .summary-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .summary-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .summary-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .summary-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .summary-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .notes-section {
+            background: rgba(255, 235, 59, 0.1);
+            border: 1px solid rgba(255, 235, 59, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .notes-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #f57c00;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .notes-content {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .schedule-wrapper {
+                padding: 20px;
+            }
+
+            .day-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+
+            .item-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .activity-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏝️ 島合宿スケジュール</h1>
+            <p class="subtitle">ランニング・トレーニングキャンプ</p>
+            <div class="duration-toggle">
+                <button class="toggle-btn active" data-duration="1泊2日">1泊2日</button>
+                <button class="toggle-btn" data-duration="2泊3日">2泊3日</button>
+            </div>
+        </div>
+
+        <div class="schedule-wrapper">
+            <!-- 1日目 -->
+            <div class="day-section">
+                <div class="day-header">
+                    <div class="day-number">1</div>
+                    <div class="day-title">1日目 - 到着・身体慣らし</div>
+                </div>
+
+                <div class="schedule-grid">
+                    <div class="schedule-item">
+                        <div class="item-header">
+                            <div class="time-badge">12:00</div>
+                            <div class="activity-title">島入り</div>
+                            <div class="activity-icon">🏝️</div>
+                        </div>
+                        <div class="activity-details">
+                            <div class="detail-item">
+                                <div class="detail-label">内容</div>
+                                <div class="detail-value">フェリー到着、チェックイン、荷物整理</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">備考</div>
+                                <div class="detail-value">島の景色を楽しみながら軽食、装備チェック</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="schedule-item">
+                        <div class="item-header">
+                            <div class="time-badge">17:00</div>
+                            <div class="activity-title">クソジョグ</div>
+                            <div class="activity-icon">🏃‍♂️</div>
+                        </div>
+                        <div class="activity-details">
+                            <div class="detail-item">
+                                <div class="detail-label">時間</div>
+                                <div class="detail-value">30〜60分</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">距離</div>
+                                <div class="detail-value">5〜8km目安</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">ペース</div>
+                                <div class="detail-value">6'30〜7'30/km（会話ペース）</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">目的</div>
+                                <div class="detail-value">身体慣らし、島の地形確認、交流</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="schedule-item">
+                        <div class="item-header">
+                            <div class="time-badge">19:00</div>
+                            <div class="activity-title">酒宴</div>
+                            <div class="activity-icon">🍻</div>
+                        </div>
+                        <div class="activity-details">
+                            <div class="detail-item">
+                                <div class="detail-label">内容</div>
+                                <div class="detail-value">BBQ、地元の海の幸、親睦深め</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">就寝</div>
+                                <div class="detail-value">22:30頃（十分な睡眠確保）</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2日目 -->
+            <div class="day-section">
+                <div class="day-header">
+                    <div class="day-number">2</div>
+                    <div class="day-title">2日目 - メイン練習・海練習</div>
+                </div>
+
+                <div class="schedule-grid">
+                    <div class="schedule-item">
+                        <div class="item-header">
+                            <div class="time-badge">6:00</div>
+                            <div class="activity-title">LSD（長距離走）</div>
+                            <div class="activity-icon">🌅</div>
+                        </div>
+                        <div class="activity-details">
+                            <div class="detail-item">
+                                <div class="detail-label">距離</div>
+                                <div class="detail-value">10〜16km</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">ペース</div>
+                                <div class="detail-value">5'30〜6'30/km</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">コース</div>
+                                <div class="detail-value">島一周、起伏に富んだルート</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">目的</div>
+                                <div class="detail-value">有酸素能力向上、脂肪燃焼、精神強化</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="schedule-item">
+                        <div class="item-header">
+                            <div class="time-badge">8:30</div>
+                            <div class="activity-title">朝食・休憩</div>
+                            <div class="activity-icon">🍽️</div>
+                        </div>
+                        <div class="activity-details">
+                            <div class="detail-item">
+                                <div class="detail-label">内容</div>
+                                <div class="detail-value">栄養バランス朝食、ストレッチ、マッサージ</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="schedule-item">
+                        <div class="item-header">
+                            <div class="time-badge">13:00</div>
+                            <div class="activity-title">海水水泳</div>
+                            <div class="activity-icon">🏊‍♂️</div>
+                        </div>
+                        <div class="activity-details">
+                            <div class="detail-item">
+                                <div class="detail-label">距離</div>
+                                <div class="detail-value">2km</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">泳法</div>
+                                <div class="detail-value">自由型（クロール）</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">目的</div>
+                                <div class="detail-value">心肺機能向上、リカバリー効果</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">安全対策</div>
+                                <div class="detail-value">ライフセーバー常駐、バディシステム</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="schedule-item">
+                        <div class="item-header">
+                            <div class="time-badge">17:00</div>
+                            <div class="activity-title">ペーラン</div>
+                            <div class="activity-icon">💨</div>
+                        </div>
+                        <div class="activity-details">
+                            <div class="detail-item">
+                                <div class="detail-label">距離</div>
+                                <div class="detail-value">8〜12km</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">ペース</div>
+                                <div class="detail-value">4'00〜5'30/km</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">コース</div>
+                                <div class="detail-value">平坦な海岸道路</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">目的</div>
+                                <div class="detail-value">スピード持久力、レースペース感覚</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="schedule-item">
+                        <div class="item-header">
+                            <div class="time-badge">19:00</div>
+                            <div class="activity-title">島出発</div>
+                            <div class="activity-icon">🚢</div>
+                        </div>
+                        <div class="activity-details">
+                            <div class="detail-item">
+                                <div class="detail-label">内容</div>
+                                <div class="detail-value">フェリー乗船、振り返り、次回計画</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- サマリー -->
+            <div class="summary-section">
+                <div class="summary-title">📊 合宿サマリー</div>
+                <div class="summary-grid">
+                    <div class="summary-card">
+                        <div class="summary-icon">🏃‍♂️</div>
+                        <div class="summary-value">18〜28km</div>
+                        <div class="summary-label">総走行距離</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-icon">🏊‍♂️</div>
+                        <div class="summary-value">2km</div>
+                        <div class="summary-label">水泳距離</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-icon">⏱️</div>
+                        <div class="summary-value">3〜4.5h</div>
+                        <div class="summary-label">総トレーニング時間</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-icon">🎯</div>
+                        <div class="summary-value">3種目</div>
+                        <div class="summary-label">トレーニング種目</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 注意事項 -->
+            <div class="notes-section">
+                <div class="notes-title">
+                    ⚠️ 重要な注意事項
+                </div>
+                <div class="notes-content">
+                    • 天候によりスケジュール変更の可能性があります<br>
+                    • 体調不良時は無理をせず、必ず申し出てください<br>
+                    • 十分な水分補給を心がけてください<br>
+                    • 日焼け止め（SPF50+）の使用を推奨します<br>
+                    • 海水浴時は安全第一で行動してください
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle buttons functionality
+        const toggleButtons = document.querySelectorAll('.toggle-btn');
+        
+        toggleButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                toggleButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Here you could add functionality to show/hide 2泊3日 content
+                const duration = this.dataset.duration;
+                console.log(`Selected duration: ${duration}`);
+            });
+        });
+
+        // Smooth animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.schedule-item').forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>

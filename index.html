@@ -30,24 +30,15 @@
         }
 
         .header {
-background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(52, 73, 94, 0.7)), 
-            url('tokashiki-spot-ranking_thumb.webp');
-background-size: cover;
-background-position: center;            color: white;
+            background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(52, 73, 94, 0.7)), 
+                        url('tokashiki-spot-ranking_thumb.webp');
+            background-size: cover;
+            background-position: center;
+            color: white;
             padding: 40px;
             text-align: center;
             position: relative;
             overflow: hidden;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" fill="%23ffffff" fill-opacity="0.05"/></svg>') bottom center/cover no-repeat;
         }
 
         .header h1 {
@@ -55,6 +46,7 @@ background-position: center;            color: white;
             margin-bottom: 10px;
             z-index: 2;
             position: relative;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
         .header .subtitle {
@@ -62,6 +54,7 @@ background-position: center;            color: white;
             opacity: 0.9;
             z-index: 2;
             position: relative;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
 
         .duration-toggle {
@@ -91,6 +84,14 @@ background-position: center;            color: white;
 
         .schedule-wrapper {
             padding: 40px;
+        }
+
+        .schedule-content {
+            display: none;
+        }
+
+        .schedule-content.active {
+            display: block;
         }
 
         .day-section {
@@ -336,217 +337,546 @@ background-position: center;            color: white;
         </div>
 
         <div class="schedule-wrapper">
-            <!-- 1日目 -->
-            <div class="day-section">
-                <div class="day-header">
-                    <div class="day-number">1</div>
-                    <div class="day-title">1日目 - 到着・身体慣らし</div>
+            <!-- 1泊2日のスケジュール -->
+            <div class="schedule-content active" id="schedule-1泊2日">
+                <!-- 1日目 -->
+                <div class="day-section">
+                    <div class="day-header">
+                        <div class="day-number">1</div>
+                        <div class="day-title">1日目 - 到着・身体慣らし</div>
+                    </div>
+
+                    <div class="schedule-grid">
+                        <div class="schedule-item">
+                            <div class="item-header">
+                                <div class="time-badge">12:00</div>
+                                <div class="activity-title">島入り</div>
+                                <div class="activity-icon">🏝️</div>
+                            </div>
+                            <div class="activity-details">
+                                <div class="detail-item">
+                                    <div class="detail-label">内容</div>
+                                    <div class="detail-value">フェリー到着、チェックイン、荷物整理</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">備考</div>
+                                    <div class="detail-value">島の景色を楽しみながら軽食、装備チェック</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="item-header">
+                                <div class="time-badge">17:00</div>
+                                <div class="activity-title">クソジョグ</div>
+                                <div class="activity-icon">🏃‍♂️</div>
+                            </div>
+                            <div class="activity-details">
+                                <div class="detail-item">
+                                    <div class="detail-label">時間</div>
+                                    <div class="detail-value">30〜60分</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">距離</div>
+                                    <div class="detail-value">5〜8km目安</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">ペース</div>
+                                    <div class="detail-value">6'30〜7'30/km（会話ペース）</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">目的</div>
+                                    <div class="detail-value">身体慣らし、島の地形確認、交流</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="item-header">
+                                <div class="time-badge">19:00</div>
+                                <div class="activity-title">酒宴</div>
+                                <div class="activity-icon">🍻</div>
+                            </div>
+                            <div class="activity-details">
+                                <div class="detail-item">
+                                    <div class="detail-label">内容</div>
+                                    <div class="detail-value">BBQ、地元の海の幸、親睦深め</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">就寝</div>
+                                    <div class="detail-value">22:30頃（十分な睡眠確保）</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="schedule-grid">
-                    <div class="schedule-item">
-                        <div class="item-header">
-                            <div class="time-badge">12:00</div>
-                            <div class="activity-title">島入り</div>
-                            <div class="activity-icon">🏝️</div>
-                        </div>
-                        <div class="activity-details">
-                            <div class="detail-item">
-                                <div class="detail-label">内容</div>
-                                <div class="detail-value">フェリー到着、チェックイン、荷物整理</div>
+                <!-- 2日目 -->
+                <div class="day-section">
+                    <div class="day-header">
+                        <div class="day-number">2</div>
+                        <div class="day-title">2日目 - メイン練習・海練習</div>
+                    </div>
+
+                    <div class="schedule-grid">
+                        <div class="schedule-item">
+                            <div class="item-header">
+                                <div class="time-badge">6:00</div>
+                                <div class="activity-title">LSD（長距離走）</div>
+                                <div class="activity-icon">🌅</div>
                             </div>
-                            <div class="detail-item">
-                                <div class="detail-label">備考</div>
-                                <div class="detail-value">島の景色を楽しみながら軽食、装備チェック</div>
+                            <div class="activity-details">
+                                <div class="detail-item">
+                                    <div class="detail-label">距離</div>
+                                    <div class="detail-value">10〜16km</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">ペース</div>
+                                    <div class="detail-value">5'30〜6'30/km</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">コース</div>
+                                    <div class="detail-value">島一周、起伏に富んだルート</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">目的</div>
+                                    <div class="detail-value">有酸素能力向上、脂肪燃焼、精神強化</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="item-header">
+                                <div class="time-badge">8:30</div>
+                                <div class="activity-title">朝食・休憩</div>
+                                <div class="activity-icon">🍽️</div>
+                            </div>
+                            <div class="activity-details">
+                                <div class="detail-item">
+                                    <div class="detail-label">内容</div>
+                                    <div class="detail-value">栄養バランス朝食、ストレッチ、マッサージ</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="item-header">
+                                <div class="time-badge">13:00</div>
+                                <div class="activity-title">海水水泳</div>
+                                <div class="activity-icon">🏊‍♂️</div>
+                            </div>
+                            <div class="activity-details">
+                                <div class="detail-item">
+                                    <div class="detail-label">距離</div>
+                                    <div class="detail-value">2km</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">泳法</div>
+                                    <div class="detail-value">自由型（クロール）</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">目的</div>
+                                    <div class="detail-value">心肺機能向上、リカバリー効果</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">安全対策</div>
+                                    <div class="detail-value">ライフセーバー常駐、バディシステム</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="item-header">
+                                <div class="time-badge">17:00</div>
+                                <div class="activity-title">ペーラン</div>
+                                <div class="activity-icon">💨</div>
+                            </div>
+                            <div class="activity-details">
+                                <div class="detail-item">
+                                    <div class="detail-label">距離</div>
+                                    <div class="detail-value">8〜12km</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">ペース</div>
+                                    <div class="detail-value">4'00〜5'30/km</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">コース</div>
+                                    <div class="detail-value">平坦な海岸道路</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">目的</div>
+                                    <div class="detail-value">スピード持久力、レースペース感覚</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="item-header">
+                                <div class="time-badge">19:00</div>
+                                <div class="activity-title">島出発</div>
+                                <div class="activity-icon">🚢</div>
+                            </div>
+                            <div class="activity-details">
+                                <div class="detail-item">
+                                    <div class="detail-label">内容</div>
+                                    <div class="detail-value">フェリー乗船、振り返り、次回計画</div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="schedule-item">
-                        <div class="item-header">
-                            <div class="time-badge">17:00</div>
-                            <div class="activity-title">クソジョグ</div>
-                            <div class="activity-icon">🏃‍♂️</div>
+                <!-- 1泊2日サマリー -->
+                <div class="summary-section">
+                    <div class="summary-title">📊 1泊2日 合宿サマリー</div>
+                    <div class="summary-grid">
+                        <div class="summary-card">
+                            <div class="summary-icon">🏃‍♂️</div>
+                            <div class="summary-value">18〜28km</div>
+                            <div class="summary-label">総走行距離</div>
                         </div>
-                        <div class="activity-details">
-                            <div class="detail-item">
-                                <div class="detail-label">時間</div>
-                                <div class="detail-value">30〜60分</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">距離</div>
-                                <div class="detail-value">5〜8km目安</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">ペース</div>
-                                <div class="detail-value">6'30〜7'30/km（会話ペース）</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">目的</div>
-                                <div class="detail-value">身体慣らし、島の地形確認、交流</div>
-                            </div>
+                        <div class="summary-card">
+                            <div class="summary-icon">🏊‍♂️</div>
+                            <div class="summary-value">2km</div>
+                            <div class="summary-label">水泳距離</div>
                         </div>
-                    </div>
-
-                    <div class="schedule-item">
-                        <div class="item-header">
-                            <div class="time-badge">19:00</div>
-                            <div class="activity-title">酒宴</div>
-                            <div class="activity-icon">🍻</div>
+                        <div class="summary-card">
+                            <div class="summary-icon">⏱️</div>
+                            <div class="summary-value">3〜4.5h</div>
+                            <div class="summary-label">総トレーニング時間</div>
                         </div>
-                        <div class="activity-details">
-                            <div class="detail-item">
-                                <div class="detail-label">内容</div>
-                                <div class="detail-value">BBQ、地元の海の幸、親睦深め</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">就寝</div>
-                                <div class="detail-value">22:30頃（十分な睡眠確保）</div>
-                            </div>
+                        <div class="summary-card">
+                            <div class="summary-icon">🎯</div>
+                            <div class="summary-value">3種目</div>
+                            <div class="summary-label">トレーニング種目</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- 2日目 -->
-            <div class="day-section">
-                <div class="day-header">
-                    <div class="day-number">2</div>
-                    <div class="day-title">2日目 - メイン練習・海練習</div>
-                </div>
-
-                <div class="schedule-grid">
-                    <div class="schedule-item">
-                        <div class="item-header">
-                            <div class="time-badge">6:00</div>
-                            <div class="activity-title">LSD（長距離走）</div>
-                            <div class="activity-icon">🌅</div>
-                        </div>
-                        <div class="activity-details">
-                            <div class="detail-item">
-                                <div class="detail-label">距離</div>
-                                <div class="detail-value">10〜16km</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">ペース</div>
-                                <div class="detail-value">5'30〜6'30/km</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">コース</div>
-                                <div class="detail-value">島一周、起伏に富んだルート</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">目的</div>
-                                <div class="detail-value">有酸素能力向上、脂肪燃焼、精神強化</div>
-                            </div>
-                        </div>
+            <!-- 2泊3日のスケジュール -->
+            <div class="schedule-content" id="schedule-2泊3日">
+                <!-- 1日目 -->
+                <div class="day-section">
+                    <div class="day-header">
+                        <div class="day-number">1</div>
+                        <div class="day-title">1日目 - 到着・身体慣らし</div>
                     </div>
 
-                    <div class="schedule-item">
-                        <div class="item-header">
-                            <div class="time-badge">8:30</div>
-                            <div class="activity-title">朝食・休憩</div>
-                            <div class="activity-icon">🍽️</div>
-                        </div>
-                        <div class="activity-details">
-                            <div class="detail-item">
-                                <div class="detail-label">内容</div>
-                                <div class="detail-value">栄養バランス朝食、ストレッチ、マッサージ</div>
+                    <div class="schedule-grid">
+                        <div class="schedule-item">
+                            <div class="item-header">
+                                <div class="time-badge">12:00</div>
+                                <div class="activity-title">島入り</div>
+                                <div class="activity-icon">🏝️</div>
+                            </div>
+                            <div class="activity-details">
+                                <div class="detail-item">
+                                    <div class="detail-label">内容</div>
+                                    <div class="detail-value">フェリー到着、チェックイン、荷物整理</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">備考</div>
+                                    <div class="detail-value">島の景色を楽しみながら軽食、装備チェック</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="schedule-item">
-                        <div class="item-header">
-                            <div class="time-badge">13:00</div>
-                            <div class="activity-title">海水水泳</div>
-                            <div class="activity-icon">🏊‍♂️</div>
+                        <div class="schedule-item">
+                            <div class="item-header">
+                                <div class="time-badge">16:00</div>
+                                <div class="activity-title">軽いジョグ</div>
+                                <div class="activity-icon">🏃‍♂️</div>
+                            </div>
+                            <div class="activity-details">
+                                <div class="detail-item">
+                                    <div class="detail-label">時間</div>
+                                    <div class="detail-value">30〜45分</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">距離</div>
+                                    <div class="detail-value">4〜6km目安</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">ペース</div>
+                                    <div class="detail-value">7'00〜8'00/km（超ゆっくり）</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">目的</div>
+                                    <div class="detail-value">旅の疲れをほぐす、島の地形確認</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="activity-details">
-                            <div class="detail-item">
-                                <div class="detail-label">距離</div>
-                                <div class="detail-value">2km</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">泳法</div>
-                                <div class="detail-value">自由型（クロール）</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">目的</div>
-                                <div class="detail-value">心肺機能向上、リカバリー効果</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">安全対策</div>
-                                <div class="detail-value">ライフセーバー常駐、バディシステム</div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="schedule-item">
-                        <div class="item-header">
-                            <div class="time-badge">17:00</div>
-                            <div class="activity-title">ペーラン</div>
-                            <div class="activity-icon">💨</div>
-                        </div>
-                        <div class="activity-details">
-                            <div class="detail-item">
-                                <div class="detail-label">距離</div>
-                                <div class="detail-value">8〜12km</div>
+                        <div class="schedule-item">
+                            <div class="item-header">
+                                <div class="time-badge">19:00</div>
+                                <div class="activity-title">歓迎パーティー</div>
+                                <div class="activity-icon">🍻</div>
                             </div>
-                            <div class="detail-item">
-                                <div class="detail-label">ペース</div>
-                                <div class="detail-value">4'00〜5'30/km</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">コース</div>
-                                <div class="detail-value">平坦な海岸道路</div>
-                            </div>
-                            <div class="detail-item">
-                                <div class="detail-label">目的</div>
-                                <div class="detail-value">スピード持久力、レースペース感覚</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="schedule-item">
-                        <div class="item-header">
-                            <div class="time-badge">19:00</div>
-                            <div class="activity-title">島出発</div>
-                            <div class="activity-icon">🚢</div>
-                        </div>
-                        <div class="activity-details">
-                            <div class="detail-item">
-                                <div class="detail-label">内容</div>
-                                <div class="detail-value">フェリー乗船、振り返り、次回計画</div>
+                            <div class="activity-details">
+                                <div class="detail-item">
+                                    <div class="detail-label">内容</div>
+                                    <div class="detail-value">BBQ、地元の海の幸、自己紹介</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">就寝</div>
+                                    <div class="detail-value">22:30頃（十分な睡眠確保）</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- サマリー -->
-            <div class="summary-section">
-                <div class="summary-title">📊 合宿サマリー</div>
-                <div class="summary-grid">
-                    <div class="summary-card">
-                        <div class="summary-icon">🏃‍♂️</div>
-                        <div class="summary-value">18〜28km</div>
-                        <div class="summary-label">総走行距離</div>
+                <!-- 2日目 -->
+                <div class="day-section">
+                    <div class="day-header">
+                        <div class="day-number">2</div>
+                        <div class="day-title">2日目 - メインワーク集中日</div>
                     </div>
-                    <div class="summary-card">
-                        <div class="summary-icon">🏊‍♂️</div>
-                        <div class="summary-value">2km</div>
-                        <div class="summary-label">水泳距離</div>
+
+                    <div class="schedule-grid">
+                        <div class="schedule-item">
+                            <div class="item-header">
+                                <div class="time-badge">6:00</div>
+                                <div class="activity-title">LSD（長距離走）</div>
+                                <div class="activity-icon">🌅</div>
+                            </div>
+                            <div class="activity-details">
+                                <div class="detail-item">
+                                    <div class="detail-label">距離</div>
+                                    <div class="detail-value">12〜20km</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">ペース</div>
+                                    <div class="detail-value">5'30〜6'30/km</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">コース</div>
+                                    <div class="detail-value">島一周×1.5〜2周、アップダウン多め</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">目的</div>
+                                    <div class="detail-value">持久力強化、疲労耐性向上</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="item-header">
+                                <div class="time-badge">8:30</div>
+                                <div class="activity-title">朝食・リカバリー</div>
+                                <div class="activity-icon">🍽️</div>
+                            </div>
+                            <div class="activity-details">
+                                <div class="detail-item">
+                                    <div class="detail-label">内容</div>
+                                    <div class="detail-value">栄養たっぷり朝食、ストレッチ、マッサージ</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="item-header">
+                                <div class="time-badge">13:00</div>
+                                <div class="activity-title">海水水泳</div>
+                                <div class="activity-icon">🏊‍♂️</div>
+                            </div>
+                            <div class="activity-details">
+                                <div class="detail-item">
+                                    <div class="detail-label">距離</div>
+                                    <div class="detail-value">2〜3km</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">泳法</div>
+                                    <div class="detail-value">自由型、平泳ぎMIX</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">目的</div>
+                                    <div class="detail-value">アクティブリカバリー、心肺機能向上</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">安全対策</div>
+                                    <div class="detail-value">ライフセーバー常駐、バディシステム</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="item-header">
+                                <div class="time-badge">17:00</div>
+                                <div class="activity-title">インターバル走</div>
+                                <div class="activity-icon">💨</div>
+                            </div>
+                            <div class="activity-details">
+                                <div class="detail-item">
+                                    <div class="detail-label">距離</div>
+                                    <div class="detail-value">6〜10km</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">ペース</div>
+                                    <div class="detail-value">3'45〜4'30/km（インターバル部）</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">メニュー</div>
+                                    <div class="detail-value">1000m×3〜5本（レスト400mジョグ）</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">目的</div>
+                                    <div class="detail-value">VO2max向上、スピード強化</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="item-header">
+                                <div class="time-badge">19:30</div>
+                                <div class="activity-title">夕食・交流会</div>
+                                <div class="activity-icon">🍽️</div>
+                            </div>
+                            <div class="activity-details">
+                                <div class="detail-item">
+                                    <div class="detail-label">内容</div>
+                                    <div class="detail-value">島料理、ランニング談義、明日への作戦会議</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="summary-card">
-                        <div class="summary-icon">⏱️</div>
-                        <div class="summary-value">3〜4.5h</div>
-                        <div class="summary-label">総トレーニング時間</div>
+                </div>
+
+                <!-- 3日目 -->
+                <div class="day-section">
+                    <div class="day-header">
+                        <div class="day-number">3</div>
+                        <div class="day-title">3日目 - 最終調整・出発</div>
                     </div>
-                    <div class="summary-card">
-                        <div class="summary-icon">🎯</div>
-                        <div class="summary-value">3種目</div>
-                        <div class="summary-label">トレーニング種目</div>
+
+                    <div class="schedule-grid">
+                        <div class="schedule-item">
+                            <div class="item-header">
+                                <div class="time-badge">6:30</div>
+                                <div class="activity-title">朝ジョグ</div>
+                                <div class="activity-icon">🌅</div>
+                            </div>
+                            <div class="activity-details">
+                                <div class="detail-item">
+                                    <div class="detail-label">距離</div>
+                                    <div class="detail-value">5〜8km</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">ペース</div>
+                                    <div class="detail-value">6'00〜7'00/km（気持ちよく）</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">コース</div>
+                                    <div class="detail-value">お気に入りのコースをもう一度</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">目的</div>
+                                    <div class="detail-value">疲労抜き、島との別れのラン</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="item-header">
+                                <div class="time-badge">8:00</div>
+                                <div class="activity-title">朝食・パッキング</div>
+                                <div class="activity-icon">🎒</div>
+                            </div>
+                            <div class="activity-details">
+                                <div class="detail-item">
+                                    <div class="detail-label">内容</div>
+                                    <div class="detail-value">最後の朝食、荷物まとめ、部屋の清掃</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="item-header">
+                                <div class="time-badge">10:00</div>
+                                <div class="activity-title">テクニック練習</div>
+                                <div class="activity-icon">🎯</div>
+                            </div>
+                            <div class="activity-details">
+                                <div class="detail-item">
+                                    <div class="detail-label">内容</div>
+                                    <div class="detail-value">ランニングフォーム確認、ドリル練習</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">時間</div>
+                                    <div class="detail-value">45分</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">目的</div>
+                                    <div class="detail-value">効率的な走法の習得、故障予防</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">メニュー</div>
+                                    <div class="detail-value">動的ストレッチ、ランニングドリル各種</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="item-header">
+                                <div class="time-badge">12:00</div>
+                                <div class="activity-title">昼食・総括</div>
+                                <div class="activity-icon">📝</div>
+                            </div>
+                            <div class="activity-details">
+                                <div class="detail-item">
+                                    <div class="detail-label">内容</div>
+                                    <div class="detail-value">最後の島グルメ、合宿の振り返り</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">議題</div>
+                                    <div class="detail-value">今後の目標設定、次回合宿の計画</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="schedule-item">
+                            <div class="item-header">
+                                <div class="time-badge">14:00</div>
+                                <div class="activity-title">島出発</div>
+                                <div class="activity-icon">🚢</div>
+                            </div>
+                            <div class="activity-details">
+                                <div class="detail-item">
+                                    <div class="detail-label">内容</div>
+                                    <div class="detail-value">フェリー乗船、達成感とともに帰路へ</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2泊3日サマリー -->
+                <div class="summary-section">
+                    <div class="summary-title">📊 2泊3日 合宿サマリー</div>
+                    <div class="summary-grid">
+                        <div class="summary-card">
+                            <div class="summary-icon">🏃‍♂️</div>
+                            <div class="summary-value">28〜45km</div>
+                            <div class="summary-label">総走行距離</div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-icon">🏊‍♂️</div>
+                            <div class="summary-value">2〜3km</div>
+                            <div class="summary-label">水泳距離</div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-icon">⏱️</div>
+                            <div class="summary-value">6〜8h</div>
+                            <div class="summary-label">総トレーニング時間</div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-icon">🎯</div>
+                            <div class="summary-value">5種目</div>
+                            <div class="summary-label">トレーニング種目</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -561,7 +891,8 @@ background-position: center;            color: white;
                     • 体調不良時は無理をせず、必ず申し出てください<br>
                     • 十分な水分補給を心がけてください<br>
                     • 日焼け止め（SPF50+）の使用を推奨します<br>
-                    • 海水浴時は安全第一で行動してください
+                    • 海水浴時は安全第一で行動してください<br>
+                    • 2泊3日の場合は持参装備が増えるため事前確認が必要です
                 </div>
             </div>
         </div>
@@ -570,15 +901,24 @@ background-position: center;            color: white;
     <script>
         // Toggle buttons functionality
         const toggleButtons = document.querySelectorAll('.toggle-btn');
+        const scheduleContents = document.querySelectorAll('.schedule-content');
         
         toggleButtons.forEach(button => {
             button.addEventListener('click', function() {
+                // Remove active class from all buttons
                 toggleButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
                 this.classList.add('active');
                 
-                // Here you could add functionality to show/hide 2泊3日 content
+                // Hide all schedule contents
+                scheduleContents.forEach(content => content.classList.remove('active'));
+                
+                // Show selected schedule content
                 const duration = this.dataset.duration;
-                console.log(`Selected duration: ${duration}`);
+                const targetContent = document.getElementById(`schedule-${duration}`);
+                if (targetContent) {
+                    targetContent.classList.add('active');
+                }
             });
         });
 
